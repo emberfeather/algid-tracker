@@ -1,14 +1,12 @@
 {
-	"information": {
-		"key": "tracker",
-		"title": "Tracker",
-		"i18n": {
-			"locales": "en_US"
-		},
-		"prerequisites": {
-		},
-		"version": "0.1.0"
+	"i18n": {
+		"locales": [
+			"en_PI",
+			"en_US"
+		]
 	},
-	"navigation": [
-	]
+	"key": "tracker",
+	"prerequisites": {
+	},
+	"version": "0.1.0"
 }
