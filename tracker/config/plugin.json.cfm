@@ -7,7 +7,7 @@
 	},
 	"key": "tracker",
 	"prerequisites": {
-		"algid": "0.1.000"
+		"algid": "0.1.001"
 	},
-	"version": "0.1.000"
+	"version": "0.1.001"
 }
