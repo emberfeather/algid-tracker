@@ -1,4 +1,17 @@
 <cfcomponent extends="algid.inc.resource.application.configure" output="false">
+	<cffunction name="configureApplication" access="public" returntype="void" output="false">
+		<cfargument name="newApplication" type="struct" required="true" />
+		
+		<cfset var temp = '' />
+		<cfset var i18n = '' />
+		
+		<cfset i18n = arguments.newApplication.managers.singleton.getI18N() />
+		
+		<cfset temp = createObject('component', 'plugins.tracker.inc.service.servLog').init( variables.datasource, i18n ) />
+		
+		<cfset arguments.newApplication.managers.singleton.setEventLog( temp ) />
+	</cffunction>
+	
 	<cffunction name="update" access="public" returntype="void" output="false">
 		<cfargument name="plugin" type="struct" required="true" />
 		<cfargument name="installedVersion" type="string" default="" />
@@ -40,27 +53,42 @@
 			TABLES
 		--->
 		
-		<!--- Log Table --->
+		<!--- Event Table --->
 		<cfquery datasource="#variables.datasource.name#">
-			CREATE TABLE "#variables.datasource.prefix#tracker".log
+			CREATE TABLE "#variables.datasource.prefix#tracker"."event"
 			(
-			  "timestamp" timestamp without time zone NOT NULL,
-			  "ipAddress" inet NOT NULL,
-			  "userID" integer NOT NULL,
-			  "key" character varying(75),
-			  title character varying(200) NOT NULL,
-			  details text,
-			  CONSTRAINT tracker_log_primary PRIMARY KEY ("timestamp", "ipAddress", "userID")
+				"timestamp" timestamp without time zone NOT NULL DEFAULT now(),
+				"ipAddress" inet NOT NULL,
+				"plugin" character varying(30) NOT NULL,
+				"key" character varying(75),
+				"userID" integer,
+				"details" character varying(500) NOT NULL,
+				CONSTRAINT tracker_event_PK PRIMARY KEY ("timestamp", "ipAddress")
 			)
 			WITH (OIDS=FALSE);
 		</cfquery>
 		
 		<cfquery datasource="#variables.datasource.name#">
-			ALTER TABLE "#variables.datasource.prefix#tracker".log OWNER TO #variables.datasource.owner#;
+			ALTER TABLE "#variables.datasource.prefix#tracker"."event" OWNER TO #variables.datasource.owner#;
 		</cfquery>
 		
 		<cfquery datasource="#variables.datasource.name#">
-			COMMENT ON TABLE "#variables.datasource.prefix#tracker".log IS 'Tracker Log';
+			COMMENT ON TABLE "#variables.datasource.prefix#tracker"."event" IS 'Tracker Event Log';
+		</cfquery>
+		
+		<!---
+			INDEXES
+		--->
+		
+		<cfquery datasource="#variables.datasource.name#">
+			CREATE INDEX "tracker_event_key_I"
+				ON "#variables.datasource.prefix#tracker"."event"
+				USING btree
+				("plugin", "key");
+		</cfquery>
+		
+		<cfquery datasource="#variables.datasource.name#">
+			ALTER TABLE "#variables.datasource.prefix#tracker"."event" CLUSTER ON "tracker_event_key_I";
 		</cfquery>
 	</cffunction>
 </cfcomponent>
