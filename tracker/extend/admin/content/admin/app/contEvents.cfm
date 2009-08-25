@@ -1,4 +1,4 @@
-<cfset viewEvent = createObject('component', 'plugins.tracker.inc.view.viewEvent').init( theURL ) />
+<cfset viewEvent = application.managers.transient.getViewEventForTracker( theURL ) />
 
 <cfset filter = {
 	} />

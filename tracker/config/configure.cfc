@@ -7,7 +7,7 @@
 		
 		<cfset i18n = arguments.newApplication.managers.singleton.getI18N() />
 		
-		<cfset temp = createObject('component', 'plugins.tracker.inc.service.servLog').init( variables.datasource, i18n ) />
+		<cfset temp = arguments.newApplication.managers.transient.getServLogForTracker( variables.datasource, i18n ) />
 		
 		<cfset arguments.newApplication.managers.singleton.setEventLog( temp ) />
 	</cffunction>
