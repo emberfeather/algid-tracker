@@ -1,4 +1,11 @@
 {
+	"applicationManagers": {
+		"transient": {
+			"servEventForTracker": "plugins.tracker.inc.service.servEvent",
+			"servLogForTracker": "plugins.tracker.inc.service.servLog",
+			"viewEventForTracker": "plugins.tracker.inc.view.viewEvent"
+		}
+	},
 	"i18n": {
 		"locales": [
 			"en_PI",
