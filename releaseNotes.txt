@@ -1,0 +1,2 @@
+  * Created the log service for logging events.
+  * Created the event service for working with events.
