@@ -1,4 +1,4 @@
-<cfset viewEvent = application.managers.transient.getViewEventForTracker( theURL ) />
+<cfset viewEvent = application.factories.transient.getViewEventForTracker( theURL ) />
 
 <cfset filter = {
 	} />
