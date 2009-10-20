@@ -1,14 +1,44 @@
 <cfcomponent extends="algid.inc.resource.base.view" output="false">
 	<cffunction name="list" access="public" returntype="string" output="false">
-		<cfargument name="items" type="query" required="true" />
-		<cfargument name="filter" type="struct" required="true" />
+		<cfargument name="data" type="any" required="true" />
 		<cfargument name="options" type="struct" default="#{}#" />
 		
-		<cfset var html = '' />
+		<cfset var datagrid = '' />
+		<cfset var i18n = '' />
 		
-		<!--- TODO Set default options for the datagrid --->
-		<cfset html = super.list( argumentCollection = arguments ) />
+		<cfset i18n = variables.transport.applicationSingletons.getI18N() />
+		<cfset datagrid = variables.transport.applicationTransients.getDatagrid(i18n, variables.transport.locale) />
 		
-		<cfreturn html />
+		<cfset datagrid.addColumn({
+				key = 'timestamp',
+				label = 'Time'
+			}) />
+		
+		<cfset datagrid.addColumn({
+				key = 'ipAddress',
+				label = 'IP Address'
+			}) />
+		
+		<cfset datagrid.addColumn({
+				key = 'userID',
+				label = 'User ID'
+			}) />
+		
+		<cfset datagrid.addColumn({
+				key = 'plugin',
+				label = 'Plugin'
+			}) />
+		
+		<cfset datagrid.addColumn({
+				key = 'key',
+				label = 'Key'
+			}) />
+		
+		<cfset datagrid.addColumn({
+				key = 'details',
+				label = 'Details'
+			}) />
+		
+		<cfreturn datagrid.toHTML( arguments.data, arguments.options ) />
 	</cffunction>
 </cfcomponent>

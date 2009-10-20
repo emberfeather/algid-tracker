@@ -1,8 +1,8 @@
-<cfset viewEvent = application.factories.transient.getViewEventForTracker( theURL ) />
+<cfset viewEvent = application.factories.transient.getViewEventForTracker( transport ) />
 
 <cfset filter = {
 	} />
 
 <cfset events = servEvent.readEvents( filter ) />
 
-<cfoutput>#viewEvent.list( events, filter )#</cfoutput>
+<cfoutput>#viewEvent.list( events )#</cfoutput>
