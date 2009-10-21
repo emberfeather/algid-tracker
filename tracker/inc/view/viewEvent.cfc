@@ -1,4 +1,31 @@
 <cfcomponent extends="algid.inc.resource.base.view" output="false">
+	<cffunction name="filter" access="public" returntype="string" output="false">
+		<cfargument name="filter" type="struct" default="#{}#" />
+		
+		<cfset var filter = '' />
+		<cfset var options = '' />
+		<cfset var results = '' />
+		
+		<cfset filter = variables.transport.applicationTransients.getFilter(variables.transport.requestSingletons.getUrl()) />
+		
+		<!--- Search --->
+		<cfset filter.addFilter('Search', 'search') />
+		
+		<!--- Timeframes --->
+		<cfset options = variables.transport.applicationTransients.getOptions() />
+		
+		<cfset options.addOption('All Available', '') />
+		<cfset options.addOption('Past Day', 'day') />
+		<cfset options.addOption('Past Week', 'week') />
+		<cfset options.addOption('Past Month', 'month') />
+		<cfset options.addOption('Past Quarter', 'quarter') />
+		<cfset options.addOption('Past Year', 'year') />
+		
+		<cfset filter.addFilter('Timeframe', 'timeframe', options) />
+		
+		<cfreturn filter.toHTML() />
+	</cffunction>
+	
 	<cffunction name="list" access="public" returntype="string" output="false">
 		<cfargument name="data" type="any" required="true" />
 		<cfargument name="options" type="struct" default="#{}#" />
