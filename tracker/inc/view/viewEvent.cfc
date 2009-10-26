@@ -1,5 +1,6 @@
 <cfcomponent extends="algid.inc.resource.base.view" output="false">
 	<cffunction name="filter" access="public" returntype="string" output="false">
+		<cfargument name="pluginKeys" type="query" required="true" />
 		<cfargument name="filter" type="struct" default="#{}#" />
 		
 		<cfset var filter = '' />
@@ -22,6 +23,23 @@
 		<cfset options.addOption('Past Year', 'year') />
 		
 		<cfset filter.addFilter('Timeframe', 'timeframe', options) />
+		
+		<!--- Plugin --->
+		<cfquery name="results" dbtype="query">
+			SELECT DISTINCT plugin
+			FROM arguments.pluginKeys
+			ORDER BY plugin ASC
+		</cfquery>
+		
+		<cfset options = variables.transport.applicationTransients.getOptions() />
+		
+		<cfset options.addOption('All Plugins', '') />
+		
+		<cfloop query="results">
+			<cfset options.addOption(results.plugin, results.plugin) />
+		</cfloop>
+		
+		<cfset filter.addFilter('Plugin', 'plugin', options) />
 		
 		<cfreturn filter.toHTML() />
 	</cffunction>
