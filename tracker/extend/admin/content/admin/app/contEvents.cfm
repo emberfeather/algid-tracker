@@ -1,6 +1,7 @@
 <cfset viewEvent = application.factories.transient.getViewEventForTracker( transport ) />
 
 <cfset filter = {
+		key = theURL.search('key'),
 		plugin = theURL.search('plugin'),
 		search = theURL.search('search'),
 		timeframe = theURL.search('timeframe')

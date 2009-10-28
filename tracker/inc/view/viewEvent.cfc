@@ -54,34 +54,37 @@
 		<cfset i18n = variables.transport.applicationSingletons.getI18N() />
 		<cfset datagrid = variables.transport.applicationTransients.getDatagrid(i18n, variables.transport.locale) />
 		
+		<!--- Add the resource bundle for the view --->
+		<cfset datagrid.addI18NBundle('plugins/tracker/i18n/inc/view', 'viewEvent') />
+		
 		<cfset datagrid.addColumn({
 				key = 'timestamp',
-				label = 'Time'
+				label = 'timestamp'
 			}) />
 		
 		<cfset datagrid.addColumn({
 				key = 'ipAddress',
-				label = 'IP Address'
+				label = 'ipAddress'
 			}) />
 		
 		<cfset datagrid.addColumn({
 				key = 'userID',
-				label = 'User ID'
+				label = 'user'
 			}) />
 		
 		<cfset datagrid.addColumn({
 				key = 'plugin',
-				label = 'Plugin'
+				label = 'plugin'
 			}) />
 		
 		<cfset datagrid.addColumn({
 				key = 'key',
-				label = 'Key'
+				label = 'key'
 			}) />
 		
 		<cfset datagrid.addColumn({
 				key = 'details',
-				label = 'Details'
+				label = 'details'
 			}) />
 		
 		<cfreturn datagrid.toHTML( arguments.data, arguments.options ) />

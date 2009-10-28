@@ -40,7 +40,10 @@
 			</cfif>
 			
 			<cfif structKeyExists(arguments.filter, 'search') AND arguments.filter.search NEQ ''>
-				AND "details" LIKE <cfqueryparam cfsqltype="cf_sql_varchar" value="%#arguments.filter.search#%" />
+				AND (
+					"details" LIKE <cfqueryparam cfsqltype="cf_sql_varchar" value="%#arguments.filter.search#%" />
+					OR "key" LIKE <cfqueryparam cfsqltype="cf_sql_varchar" value="%#arguments.filter.search#%" />
+				)
 			</cfif>
 			
 			<cfif structKeyExists(arguments.filter, 'timeframe') AND arguments.filter.timeframe NEQ ''>
