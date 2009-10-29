@@ -7,10 +7,13 @@
 		<cfset var options = '' />
 		<cfset var results = '' />
 		
-		<cfset filter = variables.transport.applicationTransients.getFilter(variables.transport.requestSingletons.getUrl()) />
+		<cfset filter = variables.transport.applicationTransients.getFilter(variables.transport.applicationSingletons.getI18N()) />
+		
+		<!--- Add the resource bundle for the view --->
+		<cfset filter.addI18NBundle('plugins/tracker/i18n/inc/view', 'viewEvent') />
 		
 		<!--- Search --->
-		<cfset filter.addFilter('Search', 'search') />
+		<cfset filter.addFilter('search') />
 		
 		<!--- Timeframes --->
 		<cfset options = variables.transport.applicationTransients.getOptions() />
@@ -22,7 +25,7 @@
 		<cfset options.addOption('Past Quarter', 'quarter') />
 		<cfset options.addOption('Past Year', 'year') />
 		
-		<cfset filter.addFilter('Timeframe', 'timeframe', options) />
+		<cfset filter.addFilter('timeframe', options) />
 		
 		<!--- Plugin --->
 		<cfquery name="results" dbtype="query">
@@ -39,9 +42,9 @@
 			<cfset options.addOption(results.plugin, results.plugin) />
 		</cfloop>
 		
-		<cfset filter.addFilter('Plugin', 'plugin', options) />
+		<cfset filter.addFilter('plugin', options) />
 		
-		<cfreturn filter.toHTML() />
+		<cfreturn filter.toHTML(variables.transport.requestSingletons.getURL()) />
 	</cffunction>
 	
 	<cffunction name="list" access="public" returntype="string" output="false">
