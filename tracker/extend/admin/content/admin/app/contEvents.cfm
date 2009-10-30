@@ -11,7 +11,9 @@
 
 <cfset pluginKeys = servEvent.readPluginKeys() />
 
-<cfset paginate = variables.transport.applicationTransients.getPaginate(events.recordcount, theURL.searchID('num'), theURL.searchID('onPage')) />
+<cfset paginate = variables.transport.applicationTransients.getPaginate(events.recordcount, SESSION.numPerPage, theURL.searchID('onPage')) />
+
+<cfset datagridFilter = SESSION.managers.singleton.getAdminDatagridFilter() />
 
 <cfoutput>
 	<div class="float-right">
@@ -22,4 +24,5 @@
 		startRow = paginate.getStartRow(),
 		numPerPage = paginate.getNumPerPage()
 	} )#
+	#datagridFilter.toHTML( theURL, { submit = 'update' } )#
 </cfoutput>
