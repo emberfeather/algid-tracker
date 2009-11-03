@@ -54,6 +54,7 @@
 		<cfset var datagrid = '' />
 		<cfset var i18n = '' />
 		
+		<cfset arguments.options.theURL = variables.transport.requestSingletons.getURL() />
 		<cfset i18n = variables.transport.applicationSingletons.getI18N() />
 		<cfset datagrid = variables.transport.applicationTransients.getDatagrid(i18n, variables.transport.locale) />
 		
@@ -67,22 +68,38 @@
 		
 		<cfset datagrid.addColumn({
 				key = 'ipAddress',
-				label = 'ipAddress'
+				label = 'ipAddress',
+				link = {
+					'ipAddress' = 'ipAddress',
+					'onPage' = 1
+				}
 			}) />
 		
 		<cfset datagrid.addColumn({
 				key = 'userID',
-				label = 'user'
+				label = 'user',
+				link = {
+					'userID' = 'userID',
+					'onPage' = 1
+				}
 			}) />
 		
 		<cfset datagrid.addColumn({
 				key = 'plugin',
-				label = 'plugin'
+				label = 'plugin',
+				link = {
+					'plugin' = 'plugin',
+					'onPage' = 1
+				}
 			}) />
 		
 		<cfset datagrid.addColumn({
 				key = 'key',
-				label = 'key'
+				label = 'key',
+				link = {
+					'key' = 'key',
+					'onPage' = 1
+				}
 			}) />
 		
 		<cfset datagrid.addColumn({

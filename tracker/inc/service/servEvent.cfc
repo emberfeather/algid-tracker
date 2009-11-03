@@ -20,11 +20,11 @@
 			</cfif>
 			
 			<cfif structKeyExists(arguments.filter, 'ipAddress') AND arguments.filter.ipAddress NEQ ''>
-				AND "ipAddress" = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.ipAddress#" />
+				AND "ipAddress" = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.ipAddress#" />::inet
 			</cfif>
 			
 			<cfif structKeyExists(arguments.filter, 'subnetMask') AND arguments.filter.subnetMask NEQ ''>
-				AND "ipAddress" << <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.subnetMask#" />
+				AND "ipAddress" << <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.subnetMask#" />::inet
 			</cfif>
 			
 			<cfif structKeyExists(arguments.filter, 'plugin') AND arguments.filter.plugin NEQ ''>
