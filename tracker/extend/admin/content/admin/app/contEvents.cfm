@@ -6,6 +6,7 @@
 	<div class="float-right">
 		#paginate.toHTML( theURL )#
 	</div>
+	#viewEvent.filterActive( filter )#
 	#viewEvent.list( events, {
 		startRow = paginate.getStartRow(),
 		numPerPage = paginate.getNumPerPage()

@@ -1,4 +1,19 @@
 <cfcomponent extends="algid.inc.resource.base.view" output="false">
+	<cffunction name="filterActive" access="public" returntype="string" output="false">
+		<cfargument name="filter" type="struct" default="#{}#" />
+		
+		<cfset var filterActive = '' />
+		<cfset var options = '' />
+		<cfset var results = '' />
+		
+		<cfset filterActive = variables.transport.applicationTransients.getFilterActive(variables.transport.applicationSingletons.getI18N()) />
+		
+		<!--- Add the resource bundle for the view --->
+		<cfset filterActive.addI18NBundle('plugins/tracker/i18n/inc/view', 'viewEvent') />
+		
+		<cfreturn filterActive.toHTML(arguments.filter, variables.transport.requestSingletons.getURL()) />
+	</cffunction>
+	
 	<cffunction name="filter" access="public" returntype="string" output="false">
 		<cfargument name="pluginKeys" type="query" required="true" />
 		<cfargument name="filter" type="struct" default="#{}#" />
