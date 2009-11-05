@@ -92,7 +92,7 @@
 		
 		<cfset datagrid.addColumn({
 				key = 'userID',
-				label = 'user',
+				label = 'userID',
 				link = {
 					'userID' = 'userID',
 					'onPage' = 1

@@ -5,7 +5,8 @@
 		'key' = theURL.search('key'),
 		'plugin' = theURL.search('plugin'),
 		'search' = theURL.search('search'),
-		'timeframe' = theURL.search('timeframe')
+		'timeframe' = theURL.search('timeframe'),
+		'userID' = theURL.search('userID')
 	} />
 
 <cfset pluginKeys = servEvent.readPluginKeys() />
