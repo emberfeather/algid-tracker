@@ -6,12 +6,12 @@
 		<cfset var options = '' />
 		<cfset var results = '' />
 		
-		<cfset filterActive = variables.transport.applicationTransients.getFilterActive(variables.transport.applicationSingletons.getI18N()) />
+		<cfset filterActive = variables.transport.theApplication.factories.transient.getFilterActive(variables.transport.theApplication.managers.singleton.getI18N()) />
 		
 		<!--- Add the resource bundle for the view --->
 		<cfset filterActive.addI18NBundle('plugins/tracker/i18n/inc/view', 'viewEvent') />
 		
-		<cfreturn filterActive.toHTML(arguments.filter, variables.transport.requestSingletons.getURL()) />
+		<cfreturn filterActive.toHTML(arguments.filter, variables.transport.theRequest.managers.singleton.getURL()) />
 	</cffunction>
 	
 	<cffunction name="filter" access="public" returntype="string" output="false">
@@ -22,7 +22,7 @@
 		<cfset var options = '' />
 		<cfset var results = '' />
 		
-		<cfset filter = variables.transport.applicationTransients.getFilter(variables.transport.applicationSingletons.getI18N()) />
+		<cfset filter = variables.transport.theApplication.factories.transient.getFilter(variables.transport.theApplication.managers.singleton.getI18N()) />
 		
 		<!--- Add the resource bundle for the view --->
 		<cfset filter.addI18NBundle('plugins/tracker/i18n/inc/view', 'viewEvent') />
@@ -31,7 +31,7 @@
 		<cfset filter.addFilter('search') />
 		
 		<!--- Timeframes --->
-		<cfset options = variables.transport.applicationTransients.getOptions() />
+		<cfset options = variables.transport.theApplication.factories.transient.getOptions() />
 		
 		<cfset options.addOption('All Available', '') />
 		<cfset options.addOption('Past Day', 'day') />
@@ -49,7 +49,7 @@
 			ORDER BY plugin ASC
 		</cfquery>
 		
-		<cfset options = variables.transport.applicationTransients.getOptions() />
+		<cfset options = variables.transport.theApplication.factories.transient.getOptions() />
 		
 		<cfset options.addOption('All Plugins', '') />
 		
@@ -59,7 +59,7 @@
 		
 		<cfset filter.addFilter('plugin', options) />
 		
-		<cfreturn filter.toHTML(variables.transport.requestSingletons.getURL()) />
+		<cfreturn filter.toHTML(variables.transport.theRequest.managers.singleton.getURL()) />
 	</cffunction>
 	
 	<cffunction name="list" access="public" returntype="string" output="false">
@@ -69,9 +69,9 @@
 		<cfset var datagrid = '' />
 		<cfset var i18n = '' />
 		
-		<cfset arguments.options.theURL = variables.transport.requestSingletons.getURL() />
-		<cfset i18n = variables.transport.applicationSingletons.getI18N() />
-		<cfset datagrid = variables.transport.applicationTransients.getDatagrid(i18n, variables.transport.locale) />
+		<cfset arguments.options.theURL = variables.transport.theRequest.managers.singleton.getURL() />
+		<cfset i18n = variables.transport.theApplication.managers.singleton.getI18N() />
+		<cfset datagrid = variables.transport.theApplication.factories.transient.getDatagrid(i18n, variables.transport.locale) />
 		
 		<!--- Add the resource bundle for the view --->
 		<cfset datagrid.addI18NBundle('plugins/tracker/i18n/inc/view', 'viewEvent') />
