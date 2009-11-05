@@ -8,8 +8,6 @@
 		'timeframe' = theURL.search('timeframe')
 	} />
 
-<cfset events = servEvent.readEvents( filter ) />
-
 <cfset pluginKeys = servEvent.readPluginKeys() />
 
 <cfoutput>
