@@ -77,6 +77,14 @@
 					"timestamp" DESC
 				</cfdefaultcase>
 			</cfswitch>
+			
+			<cfif structKeyExists(arguments.filter, 'limit')>
+				LIMIT <cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.filter.limit#" />
+			</cfif>
+			
+			<cfif structKeyExists(arguments.filter, 'offset')>
+				OFFSET <cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.filter.offset#" />
+			</cfif>
 		</cfquery>
 		
 		<cfreturn results />

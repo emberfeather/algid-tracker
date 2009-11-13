@@ -124,4 +124,31 @@
 		
 		<cfreturn datagrid.toHTML( arguments.data, arguments.options ) />
 	</cffunction>
+	
+	<cffunction name="recent" access="public" returntype="string" output="false">
+		<cfargument name="data" type="query" required="true" />
+		<cfargument name="options" type="struct" default="#{}#" />
+		
+		<cfset var html = '' />
+		<cfset var timeago = variables.transport.theApplication.managers.singleton.getTimeago() />
+		
+		<cfsavecontent variable="html">
+			<cfoutput>
+				<cfloop query="arguments.data">
+					<div>
+						<strong>#arguments.data.details#</strong>
+						<div class="light">
+							<div class="float-right">
+								#timeago.toHTML(arguments.data.timestamp)#
+							</div>
+							
+							#arguments.data.plugin#
+						</div>
+					</div>
+				</cfloop>
+			</cfoutput>
+		</cfsavecontent>
+		
+		<cfreturn html />
+	</cffunction>
 </cfcomponent>
