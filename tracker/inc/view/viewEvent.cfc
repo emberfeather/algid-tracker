@@ -68,17 +68,28 @@
 		
 		<cfset var datagrid = '' />
 		<cfset var i18n = '' />
+		<cfset var timeago = '' />
 		
 		<cfset arguments.options.theURL = variables.transport.theRequest.managers.singleton.getURL() />
 		<cfset i18n = variables.transport.theApplication.managers.singleton.getI18N() />
 		<cfset datagrid = variables.transport.theApplication.factories.transient.getDatagrid(i18n, variables.transport.locale) />
+		<cfset timeago = variables.transport.theApplication.managers.singleton.getTimeago() />
 		
 		<!--- Add the resource bundle for the view --->
 		<cfset datagrid.addBundle('plugins/tracker/i18n/inc/view', 'viewEvent') />
 		
 		<cfset datagrid.addColumn({
+				format = 'd mmm yyyy',
 				key = 'timestamp',
-				label = 'timestamp'
+				label = 'date',
+				type = 'date'
+			}) />
+		
+		<cfset datagrid.addColumn({
+				format = 'HH:mm:ss',
+				key = 'timestamp',
+				label = 'time',
+				type = 'time'
 			}) />
 		
 		<cfset datagrid.addColumn({
@@ -129,20 +140,34 @@
 		<cfargument name="data" type="query" required="true" />
 		<cfargument name="options" type="struct" default="#{}#" />
 		
+		<cfset var defaults = {
+				base = '.admin.app.events'
+			} />
 		<cfset var html = '' />
+		<cfset var theURL = variables.transport.theRequest.managers.singleton.getUrl() />
 		<cfset var timeago = variables.transport.theApplication.managers.singleton.getTimeago() />
+		
+		<cfset arguments.options = extend(defaults, arguments.options) />
+		
+		<!--- Set a base to go to --->
+		<cfset theURL.setRecentEvents('_base', arguments.options.base) />
 		
 		<cfsavecontent variable="html">
 			<cfoutput>
+				<h3><a href="#theURL.getRecentEvents()#">Recent Events</a></h3>
+				
 				<cfloop query="arguments.data">
+					<cfset theURL.setRecentEvents('plugin', arguments.data.plugin) />
+					
 					<div>
 						<strong>#arguments.data.details#</strong>
+						
 						<div class="light">
 							<div class="float-right">
 								#timeago.toHTML(arguments.data.timestamp)#
 							</div>
 							
-							#arguments.data.plugin#
+							<a href="#theURL.getRecentEvents()#">#arguments.data.plugin#</a>
 						</div>
 					</div>
 				</cfloop>
