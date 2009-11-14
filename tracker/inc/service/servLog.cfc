@@ -4,6 +4,7 @@
 		<cfargument name="key" type="string" required="true" />
 		<cfargument name="details" type="string" required="true" />
 		<cfargument name="userID" type="numeric" default="0" />
+		<cfargument name="itemID" type="numeric" default="0" />
 		<cfargument name="ipAddress" type="string" default="#CGI.REMOTE_ADDR#" />
 		
 		<!--- TODO For Dev use an alternative if it isn't a good IP... --->
@@ -19,13 +20,15 @@
 				"plugin",
 				"key",
 				"details",
-				"userID"
+				"userID",
+				"itemID"
 			) VALUES (
 				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.ipAddress#" />::inet,
 				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.plugin#" />,
 				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.key#" />,
 				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.details#" />,
-				<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.userID#" null="#arguments.userID LTE 0#" />
+				<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.userID#" null="#arguments.userID LTE 0#" />,
+				<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.itemID#" null="#arguments.itemID LTE 0#" />
 			)
 		</cfquery>
 	</cffunction>

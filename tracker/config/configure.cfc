@@ -64,11 +64,12 @@
 				"plugin" character varying(30) NOT NULL,
 				"key" character varying(75),
 				"userID" integer,
+				"itemID" integer,
 				"details" character varying(500) NOT NULL,
 				CONSTRAINT tracker_event_PK PRIMARY KEY ("timestamp", "ipAddress"),
 				CONSTRAINT "event_userID_FK" FOREIGN KEY ("userID")
 					REFERENCES "#variables.datasource.prefix#user"."user" ("userID") MATCH SIMPLE
-					ON UPDATE CASCADE ON DELETE CASCADE
+					ON UPDATE NO ACTION ON DELETE NO ACTION
 			)
 			WITH (OIDS=FALSE);
 		</cfquery>
