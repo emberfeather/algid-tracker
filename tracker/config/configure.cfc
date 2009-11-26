@@ -1,15 +1,15 @@
 <cfcomponent extends="algid.inc.resource.plugin.configure" output="false">
 	<cffunction name="onApplicationStart" access="public" returntype="void" output="false">
-		<cfargument name="newApplication" type="struct" required="true" />
+		<cfargument name="theApplication" type="struct" required="true" />
 		
 		<cfset var temp = '' />
 		<cfset var i18n = '' />
 		
-		<cfset i18n = arguments.newApplication.managers.singleton.getI18N() />
+		<cfset i18n = arguments.theApplication.managers.singleton.getI18N() />
 		
-		<cfset temp = arguments.newApplication.factories.transient.getServLogForTracker( variables.datasource, i18n ) />
+		<cfset temp = arguments.theApplication.factories.transient.getServLogForTracker( variables.datasource, i18n ) />
 		
-		<cfset arguments.newApplication.managers.singleton.setEventLog( temp ) />
+		<cfset arguments.theApplication.managers.singleton.setEventLog( temp ) />
 	</cffunction>
 	
 	<cffunction name="update" access="public" returntype="void" output="false">
