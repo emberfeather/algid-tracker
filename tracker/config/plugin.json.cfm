@@ -17,6 +17,10 @@
 	"prerequisites": {
 		"algid": "0.1.1"
 	},
+	"requestSingletons": {
+	},
+	"requestTransients": {
+	},
 	"sessionSingletons": {
 	},
 	"sessionTransients": {
