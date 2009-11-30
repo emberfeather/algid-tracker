@@ -160,11 +160,15 @@
 					<cfset theURL.setRecentEvents('plugin', arguments.data.plugin) />
 					
 					<div>
-						<div class="float-right light">
-							#timeago.toHTML(arguments.data.timestamp)#
-						</div>
-						
 						<strong>#arguments.data.details#</strong>
+						
+						<div class="small light">
+							<div class="float-right">
+								#timeago.toHTML(arguments.data.timestamp)#
+							</div>
+							
+							<a href="#theURL.getRecentEvents()#">#arguments.data.plugin#</a>
+						</div>
 						
 						<div class="clear"><!-- clear --></div>
 					</div>
