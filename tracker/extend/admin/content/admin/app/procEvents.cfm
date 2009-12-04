@@ -1,4 +1,4 @@
-<cfset servEvent = application.factories.transient.getServEventForTracker(application.app.getDSUpdate(), transport) />
+<cfset servEvent = transport.theApplication.factories.transient.getServEventForTracker(application.app.getDSUpdate(), transport) />
 
 <cfif CGI.REQUEST_METHOD EQ 'post'>
 	<!--- Update the URL and redirect --->
