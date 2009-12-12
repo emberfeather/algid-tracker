@@ -19,7 +19,7 @@
 		<cfset var versions = createObject('component', 'algid.inc.resource.utility.version').init() />
 		
 		<!--- fresh => 0.1.0 --->
-		<cfif versions.compareVersions(arguments.installedVersion, '0.1.0') LT 0>
+		<cfif versions.compareVersions(arguments.installedVersion, '0.1.0') lt 0>
 			<!--- Setup the Database --->
 			<cfswitch expression="#variables.datasource.type#">
 				<cfcase value="PostgreSQL">
@@ -44,7 +44,7 @@
 		<!--- Tracker schema --->
 		<cfquery datasource="#variables.datasource.name#">
 			CREATE SCHEMA "#variables.datasource.prefix#tracker"
-				AUTHORIZATION #variables.datasource.owner#;
+				AUTHorIZATION #variables.datasource.owner#;
 		</cfquery>
 		
 		<cfquery datasource="#variables.datasource.name#">
@@ -59,15 +59,15 @@
 		<cfquery datasource="#variables.datasource.name#">
 			CREATE TABLE "#variables.datasource.prefix#tracker"."event"
 			(
-				"timestamp" timestamp without time zone NOT NULL DEFAULT now(),
-				"ipAddress" inet NOT NULL,
-				"plugin" character varying(30) NOT NULL,
+				"timestamp" timestamp without time zone not NULL DEFAUlt now(),
+				"ipAddress" inet not NULL,
+				"plugin" character varying(30) not NULL,
 				"key" character varying(75),
 				"userID" integer,
 				"itemID" integer,
-				"details" character varying(500) NOT NULL,
+				"details" character varying(500) not NULL,
 				CONSTRAINT tracker_event_PK PRIMARY KEY ("timestamp", "ipAddress"),
-				CONSTRAINT "event_userID_FK" FOREIGN KEY ("userID")
+				CONSTRAINT "event_userID_FK" ForEIGN KEY ("userID")
 					REFERENCES "#variables.datasource.prefix#user"."user" ("userID") MATCH SIMPLE
 					ON UPDATE NO ACTION ON DELETE NO ACTION
 			)
@@ -75,7 +75,7 @@
 		</cfquery>
 		
 		<cfquery datasource="#variables.datasource.name#">
-			ALTER TABLE "#variables.datasource.prefix#tracker"."event" OWNER TO #variables.datasource.owner#;
+			AlteR TABLE "#variables.datasource.prefix#tracker"."event" OWNER TO #variables.datasource.owner#;
 		</cfquery>
 		
 		<cfquery datasource="#variables.datasource.name#">
@@ -94,7 +94,7 @@
 		</cfquery>
 		
 		<cfquery datasource="#variables.datasource.name#">
-			ALTER TABLE "#variables.datasource.prefix#tracker"."event" CLUSTER ON "tracker_event_key_I";
+			AlteR TABLE "#variables.datasource.prefix#tracker"."event" CLUSTER ON "tracker_event_key_I";
 		</cfquery>
 	</cffunction>
 </cfcomponent>

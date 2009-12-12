@@ -11,43 +11,43 @@
 			FROM "#variables.datasource.prefix#tracker"."event"
 			WHERE 1=1
 			
-			<cfif structKeyExists(arguments.filter, 'before') AND arguments.filter.before NEQ ''>
-				AND "timestamp" < <cfqueryparam cfsqltype="cf_sql_timestamp" value="#arguments.filter.before#" />
+			<cfif structKeyExists(arguments.filter, 'before') and arguments.filter.before neq ''>
+				and "timestamp" < <cfqueryparam cfsqltype="cf_sql_timestamp" value="#arguments.filter.before#" />
 			</cfif>
 			
-			<cfif structKeyExists(arguments.filter, 'after') AND arguments.filter.after NEQ ''>
-				AND "timestamp" < <cfqueryparam cfsqltype="cf_sql_timestamp" value="#arguments.filter.after#" />
+			<cfif structKeyExists(arguments.filter, 'after') and arguments.filter.after neq ''>
+				and "timestamp" < <cfqueryparam cfsqltype="cf_sql_timestamp" value="#arguments.filter.after#" />
 			</cfif>
 			
-			<cfif structKeyExists(arguments.filter, 'ipAddress') AND arguments.filter.ipAddress NEQ ''>
-				AND "ipAddress" = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.ipAddress#" />::inet
+			<cfif structKeyExists(arguments.filter, 'ipAddress') and arguments.filter.ipAddress neq ''>
+				and "ipAddress" = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.ipAddress#" />::inet
 			</cfif>
 			
-			<cfif structKeyExists(arguments.filter, 'subnetMask') AND arguments.filter.subnetMask NEQ ''>
-				AND "ipAddress" << <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.subnetMask#" />::inet
+			<cfif structKeyExists(arguments.filter, 'subnetMask') and arguments.filter.subnetMask neq ''>
+				and "ipAddress" << <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.subnetMask#" />::inet
 			</cfif>
 			
-			<cfif structKeyExists(arguments.filter, 'plugin') AND arguments.filter.plugin NEQ ''>
-				AND "plugin" = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.plugin#" />
+			<cfif structKeyExists(arguments.filter, 'plugin') and arguments.filter.plugin neq ''>
+				and "plugin" = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.plugin#" />
 			</cfif>
 			
-			<cfif structKeyExists(arguments.filter, 'key') AND arguments.filter.key NEQ ''>
-				AND "key" = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.key#" />
+			<cfif structKeyExists(arguments.filter, 'key') and arguments.filter.key neq ''>
+				and "key" = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.key#" />
 			</cfif>
 			
-			<cfif structKeyExists(arguments.filter, 'keyMask') AND arguments.filter.keyMask NEQ ''>
-				AND "key" LIKE <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.keyMask#" />
+			<cfif structKeyExists(arguments.filter, 'keyMask') and arguments.filter.keyMask neq ''>
+				and "key" LIKE <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.keyMask#" />
 			</cfif>
 			
-			<cfif structKeyExists(arguments.filter, 'search') AND arguments.filter.search NEQ ''>
-				AND (
+			<cfif structKeyExists(arguments.filter, 'search') and arguments.filter.search neq ''>
+				and (
 					"details" LIKE <cfqueryparam cfsqltype="cf_sql_varchar" value="%#arguments.filter.search#%" />
-					OR "key" LIKE <cfqueryparam cfsqltype="cf_sql_varchar" value="%#arguments.filter.search#%" />
+					or "key" LIKE <cfqueryparam cfsqltype="cf_sql_varchar" value="%#arguments.filter.search#%" />
 				)
 			</cfif>
 			
-			<cfif structKeyExists(arguments.filter, 'timeframe') AND arguments.filter.timeframe NEQ ''>
-				AND "timestamp" >=
+			<cfif structKeyExists(arguments.filter, 'timeframe') and arguments.filter.timeframe neq ''>
+				and "timestamp" >=
 				<cfswitch expression="#arguments.filter.timeframe#">
 					<cfcase value="day">
 						<cfqueryparam cfsqltype="cf_sql_timestamp" value="#dateAdd('d', -1, now())#" />
@@ -67,11 +67,11 @@
 				</cfswitch>
 			</cfif>
 			
-			<cfif structKeyExists(arguments.filter, 'userID') AND arguments.filter.userID NEQ ''>
-				AND "userID" = <cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.filter.userID#" />
+			<cfif structKeyExists(arguments.filter, 'userID') and arguments.filter.userID neq ''>
+				and "userID" = <cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.filter.userID#" />
 			</cfif>
 			
-			ORDER BY
+			orDER BY
 			<cfswitch expression="#arguments.filter.orderBy#">
 				<cfdefaultcase>
 					"timestamp" DESC

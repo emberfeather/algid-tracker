@@ -46,7 +46,7 @@
 		<cfquery name="results" dbtype="query">
 			SELECT DISTINCT plugin
 			FROM arguments.pluginKeys
-			ORDER BY plugin ASC
+			orDER BY plugin ASC
 		</cfquery>
 		
 		<cfset options = variables.transport.theApplication.factories.transient.getOptions() />

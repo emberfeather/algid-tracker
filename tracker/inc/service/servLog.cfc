@@ -8,7 +8,7 @@
 		<cfargument name="ipAddress" type="string" default="#CGI.REMOTE_ADDR#" />
 		
 		<!--- TODO For Dev use an alternative if it isn't a good IP... --->
-		<cfif arguments.ipAddress EQ '0:0:0:0:0:0:0:1%0'>
+		<cfif arguments.ipAddress eq '0:0:0:0:0:0:0:1%0'>
 			<cfset arguments.ipAddress = CGI.LOCAL_ADDR />
 		</cfif>
 		
@@ -27,8 +27,8 @@
 				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.plugin#" />,
 				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.key#" />,
 				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.details#" />,
-				<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.userID#" null="#arguments.userID LTE 0#" />,
-				<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.itemID#" null="#arguments.itemID LTE 0#" />
+				<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.userID#" null="#arguments.userID lte 0#" />,
+				<cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.itemID#" null="#arguments.itemID lte 0#" />
 			)
 		</cfquery>
 	</cffunction>
