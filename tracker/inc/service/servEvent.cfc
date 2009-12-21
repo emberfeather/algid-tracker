@@ -71,7 +71,7 @@
 				and "userID" = <cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.filter.userID#" />
 			</cfif>
 			
-			orDER BY
+			ORDER BY
 			<cfswitch expression="#arguments.filter.orderBy#">
 				<cfdefaultcase>
 					"timestamp" DESC
