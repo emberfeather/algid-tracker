@@ -68,7 +68,7 @@
 			</cfif>
 			
 			<cfif structKeyExists(arguments.filter, 'userID') and arguments.filter.userID neq ''>
-				and "userID" = <cfqueryparam cfsqltype="cf_sql_integer" value="#arguments.filter.userID#" />
+				and "userID" = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.filter.userID#" />::uuid
 			</cfif>
 			
 			ORDER BY

@@ -63,8 +63,8 @@
 				"ipAddress" inet not NULL,
 				"plugin" character varying(30) not NULL,
 				"key" character varying(75),
-				"userID" integer,
-				"itemID" integer,
+				"userID" uuid,
+				"itemID" uuid,
 				"details" character varying(500) not NULL,
 				CONSTRAINT tracker_event_PK PRIMARY KEY ("timestamp", "ipAddress"),
 				CONSTRAINT "event_userID_FK" ForEIGN KEY ("userID")
@@ -75,7 +75,7 @@
 		</cfquery>
 		
 		<cfquery datasource="#variables.datasource.name#">
-			AlteR TABLE "#variables.datasource.prefix#tracker"."event" OWNER TO #variables.datasource.owner#;
+			ALTER TABLE "#variables.datasource.prefix#tracker"."event" OWNER TO #variables.datasource.owner#;
 		</cfquery>
 		
 		<cfquery datasource="#variables.datasource.name#">
@@ -94,7 +94,7 @@
 		</cfquery>
 		
 		<cfquery datasource="#variables.datasource.name#">
-			AlteR TABLE "#variables.datasource.prefix#tracker"."event" CLUSTER ON "tracker_event_key_I";
+			ALTER TABLE "#variables.datasource.prefix#tracker"."event" CLUSTER ON "tracker_event_key_I";
 		</cfquery>
 	</cffunction>
 </cfcomponent>
