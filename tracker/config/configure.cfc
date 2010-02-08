@@ -44,7 +44,7 @@
 		<!--- Tracker schema --->
 		<cfquery datasource="#variables.datasource.name#">
 			CREATE SCHEMA "#variables.datasource.prefix#tracker"
-				AUTHorIZATION #variables.datasource.owner#;
+				AUTHORIZATION #variables.datasource.owner#;
 		</cfquery>
 		
 		<cfquery datasource="#variables.datasource.name#">
@@ -59,7 +59,7 @@
 		<cfquery datasource="#variables.datasource.name#">
 			CREATE TABLE "#variables.datasource.prefix#tracker"."event"
 			(
-				"timestamp" timestamp without time zone not NULL DEFAUlt now(),
+				"timestamp" timestamp without time zone not NULL DEFAULT now(),
 				"ipAddress" inet not NULL,
 				"plugin" character varying(30) not NULL,
 				"key" character varying(75),
@@ -67,7 +67,7 @@
 				"itemID" uuid,
 				"details" character varying(500) not NULL,
 				CONSTRAINT tracker_event_PK PRIMARY KEY ("timestamp", "ipAddress"),
-				CONSTRAINT "event_userID_FK" ForEIGN KEY ("userID")
+				CONSTRAINT "event_userID_FK" FOREIGN KEY ("userID")
 					REFERENCES "#variables.datasource.prefix#user"."user" ("userID") MATCH SIMPLE
 					ON UPDATE NO ACTION ON DELETE NO ACTION
 			)
