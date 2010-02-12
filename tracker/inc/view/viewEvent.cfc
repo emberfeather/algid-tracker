@@ -160,7 +160,7 @@
 					<cfset theURL.setRecentEvents('plugin', arguments.data.plugin) />
 					
 					<div>
-						<strong>#arguments.data.details#</strong>
+						<strong>#htmlEditFormat(arguments.data.details)#</strong>
 						
 						<div class="small light">
 							<div class="float-right">
