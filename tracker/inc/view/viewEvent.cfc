@@ -141,7 +141,7 @@
 		<cfargument name="options" type="struct" default="#{}#" />
 		
 		<cfset var defaults = {
-				base = '.admin.app.events'
+				base = '/admin/app/events'
 			} />
 		<cfset var html = '' />
 		<cfset var theURL = variables.transport.theRequest.managers.singleton.getUrl() />
