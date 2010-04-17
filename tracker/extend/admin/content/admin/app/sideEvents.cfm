@@ -9,8 +9,8 @@
 		'userID' = theURL.search('userID')
 	} />
 
-<cfset pluginKeys = servEvent.readPluginKeys() />
+<cfset pluginKeys = servEvent.getPluginKeys() />
 
 <cfoutput>
-	#viewEvent.filter( pluginKeys, filter )#
+	#viewEvent.filter( filter, pluginKeys )#
 </cfoutput>

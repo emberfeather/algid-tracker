@@ -1,5 +1,5 @@
 <cfcomponent extends="algid.inc.resource.base.service" output="false">
-	<cffunction name="readEvents" access="public" returntype="query" output="false">
+	<cffunction name="getEvents" access="public" returntype="query" output="false">
 		<cfargument name="filter" type="struct" default="#{}#" />
 		
 		<cfset var results = '' />
@@ -90,7 +90,7 @@
 		<cfreturn results />
 	</cffunction>
 	
-	<cffunction name="readPluginKeys" access="public" returntype="query" output="false">
+	<cffunction name="getPluginKeys" access="public" returntype="query" output="false">
 		<cfset var results = '' />
 		
 		<cfquery name="results" datasource="#variables.datasource.name#">

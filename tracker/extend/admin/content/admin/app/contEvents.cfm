@@ -1,4 +1,4 @@
-<cfset events = servEvent.readEvents( filter ) />
+<cfset events = servEvent.getEvents( filter ) />
 
 <cfset paginate = variables.transport.theApplication.factories.transient.getPaginate(events.recordcount, session.numPerPage, theURL.searchID('onPage')) />
 
