@@ -3,8 +3,7 @@
 		"timeago": "cf-compendium.inc.resource.utility.timeago",
 	},
 	"applicationTransients": {
-		"servLogForTracker": "plugins.tracker.inc.service.servLog",
-		"viewEventForTracker": "plugins.tracker.inc.view.viewEvent"
+		"servLogForTracker": "plugins.tracker.inc.service.servLog"
 	},
 	"i18n": {
 		"locales": [

@@ -1,4 +1,4 @@
-<cfset viewEvent = transport.theApplication.factories.transient.getViewEventForTracker( transport ) />
+<cfset viewEvent = views.get('tracker', 'event') />
 
 <cfset filter = {
 		'ipAddress' = theURL.search('ipAddress'),
