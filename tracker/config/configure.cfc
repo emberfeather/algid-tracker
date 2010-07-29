@@ -3,11 +3,8 @@
 		<cfargument name="theApplication" type="struct" required="true" />
 		
 		<cfset var temp = '' />
-		<cfset var i18n = '' />
 		
-		<cfset i18n = arguments.theApplication.managers.singleton.getI18N() />
-		
-		<cfset temp = arguments.theApplication.factories.transient.getServLogForTracker( variables.datasource, i18n ) />
+		<cfset temp = arguments.theApplication.factories.transient.getServLogForTracker( { theApplication = arguments.theApplication } ) />
 		
 		<cfset arguments.theApplication.managers.singleton.setEventLog( temp ) />
 	</cffunction>

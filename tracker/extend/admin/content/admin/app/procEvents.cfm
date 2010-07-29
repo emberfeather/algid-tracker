@@ -1,4 +1,4 @@
-<cfset servEvent = transport.theApplication.factories.transient.getServEventForTracker(transport.theApplication.managers.singleton.getApplication().getDSUpdate(), transport) />
+<cfset servEvent = services.get('tracker', 'event') />
 
 <cfif cgi.request_method eq 'post'>
 	<!--- Update the URL and redirect --->
