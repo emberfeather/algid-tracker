@@ -12,6 +12,7 @@
 		]
 	},
 	"key": "tracker",
+	"plugin": "Tracker",
 	"prerequisites": {
 		"algid": "0.1.1"
 	},
