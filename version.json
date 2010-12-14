@@ -1,6 +1,8 @@
 {
-	"releaseNotes": "http://github.com/emberfeather/algid-tracker/wiki/Release-Notes",
 	"archive": "http://github.com/emberfeather/algid-tracker/tarball/0.1.0",
+	"key": "tracker",
+	"releaseNotes": "http://github.com/emberfeather/algid-tracker/wiki/Release-Notes",
+	"title": "Tracker",
 	"URL": "http://github.com/emberfeather/algid-tracker",
 	"version": "0.1.0"
 }
