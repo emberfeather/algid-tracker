@@ -3,9 +3,7 @@
 		"timeago": "cf-compendium.inc.resource.utility.timeago",
 	},
 	"applicationTransients": {
-		"servEventForTracker": "plugins.tracker.inc.service.servEvent",
-		"servLogForTracker": "plugins.tracker.inc.service.servLog",
-		"viewEventForTracker": "plugins.tracker.inc.view.viewEvent"
+		"servLogForTracker": "plugins.tracker.inc.service.servLog"
 	},
 	"i18n": {
 		"locales": [
@@ -14,6 +12,7 @@
 		]
 	},
 	"key": "tracker",
+	"plugin": "Tracker",
 	"prerequisites": {
 		"algid": "0.1.1"
 	},

@@ -86,28 +86,13 @@
 			}) />
 		
 		<cfset datagrid.addColumn({
-				format = 'HH:mm:ss',
-				key = 'timestamp',
-				label = 'time',
-				type = 'time'
-			}) />
-		
-		<cfset datagrid.addColumn({
-				key = 'ipAddress',
-				label = 'ipAddress',
-				link = {
-					'ipAddress' = 'ipAddress',
-					'onPage' = 1
-				}
-			}) />
-		
-		<cfset datagrid.addColumn({
 				key = 'userID',
 				label = 'userID',
 				link = {
 					'userID' = 'userID',
 					'onPage' = 1
-				}
+				},
+				type = 'uuid'
 			}) />
 		
 		<cfset datagrid.addColumn({
