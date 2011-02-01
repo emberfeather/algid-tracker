@@ -8,7 +8,16 @@
 		
 		<cfset arguments.theApplication.managers.singleton.setEventLog( temp ) />
 	</cffunction>
-	
+<cfscript>
+	public void function onRequestStart(required struct theApplication, required struct theSession, required struct theRequest, required string targetPage) {
+		var temp = '';
+		
+		// Create a profiler object
+		temp = arguments.theApplication.factories.transient.getProfiler(arguments.theApplication.managers.singleton.getApplication().isDevelopment());
+		
+		arguments.theRequest.managers.singleton.setProfiler( temp );
+	}
+</cfscript>
 	<cffunction name="update" access="public" returntype="void" output="false">
 		<cfargument name="plugin" type="struct" required="true" />
 		<cfargument name="installedVersion" type="string" default="" />
