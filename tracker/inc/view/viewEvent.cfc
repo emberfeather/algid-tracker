@@ -77,44 +77,48 @@
 		<cfset datagrid.addBundle('plugins/tracker/i18n/inc/view', 'viewEvent') />
 		
 		<cfset datagrid.addColumn({
-				format = 'd mmm yyyy',
-				key = 'timestamp',
-				label = 'date',
-				type = 'date'
-			}) />
-		
-		<cfset datagrid.addColumn({
-				key = 'userID',
-				label = 'userID',
-				link = {
-					'userID' = 'userID',
-					'onPage' = 1
-				},
-				type = 'uuid'
-			}) />
-		
-		<cfset datagrid.addColumn({
-				key = 'plugin',
-				label = 'plugin',
-				link = {
-					'plugin' = 'plugin',
-					'onPage' = 1
+			format = {
+				date: {
+					mask: 'd mmm yyyy'
 				}
-			}) />
+			},
+			key = 'timestamp'
+		}) />
 		
 		<cfset datagrid.addColumn({
-				key = 'key',
-				label = 'key',
-				link = {
-					'key' = 'key',
-					'onPage' = 1
-				}
-			}) />
+			key = 'userID',
+			format = {
+				uuid: {}
+			},
+			label = 'userID',
+			link = {
+				'userID' = 'userID',
+				'onPage' = 1
+			}
+		}) />
 		
 		<cfset datagrid.addColumn({
-				key = 'details',
-				label = 'details'
-			}) />
+			key = 'plugin',
+			label = 'plugin',
+			link = {
+				'plugin' = 'plugin',
+				'onPage' = 1
+			}
+		}) />
+		
+		<cfset datagrid.addColumn({
+			key = 'key',
+			label = 'key',
+			link = {
+				'key' = 'key',
+				'onPage' = 1
+			}
+		}) />
+		
+		<cfset datagrid.addColumn({
+			key = 'details',
+			label = 'details'
+		}) />
 		
 		<cfreturn datagrid.toHTML( arguments.data, arguments.options ) />
 	</cffunction>
