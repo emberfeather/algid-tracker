@@ -37,6 +37,20 @@
 				</cfdefaultcase>
 			</cfswitch>
 		</cfif>
+		
+		<!--- 0.1.0 => 0.1.5 --->
+		<cfif versions.compareVersions(arguments.installedVersion, '0.1.5') lt 0>
+			<!--- Setup the Database --->
+			<cfswitch expression="#variables.datasource.type#">
+				<cfcase value="PostgreSQL">
+					<cfset postgreSQL0_1_5() />
+				</cfcase>
+				<cfdefaultcase>
+					<!--- TODO Remove this thow when a later version supports more database types  --->
+					<cfthrow message="Database Type Not Supported" detail="The #variables.datasource.type# database type is not currently supported" />
+				</cfdefaultcase>
+			</cfswitch>
+		</cfif>
 	</cffunction>
 	
 	<!---
@@ -101,6 +115,59 @@
 		
 		<cfquery datasource="#variables.datasource.name#">
 			ALTER TABLE "#variables.datasource.prefix#tracker"."event" CLUSTER ON "tracker_event_key_I";
+		</cfquery>
+	</cffunction>
+	
+	<!---
+		Configures the database for v0.1.5
+	--->
+	<cffunction name="postgreSQL0_1_5" access="public" returntype="void" output="false">
+		<!---
+			TABLES
+		--->
+		
+		<!--- Drop the old primary key --->
+		<!--- 
+		<cfquery datasource="#variables.datasource.name#">
+			ALTER TABLE "#variables.datasource.prefix#tracker".event DROP CONSTRAINT tracker_event_PK;
+		</cfquery>
+		
+		<!--- Add column for an id --->
+		<cfquery datasource="#variables.datasource.name#">
+			ALTER TABLE "#variables.datasource.prefix#tracker".event ADD COLUMN "eventID" uuid;
+		</cfquery>
+		 --->
+		
+		<!--- Make sure all the ids have a value --->
+		<cfquery name="local.results" datasource="#variables.datasource.name#">
+			SELECT "timestamp", "ipAddress"
+			FROM "#variables.datasource.prefix#tracker".event
+		</cfquery>
+		
+		<cfloop query="local.results">
+			<cfquery datasource="#variables.datasource.name#">
+				UPDATE "#variables.datasource.prefix#tracker".event
+				SET "eventID" = <cfqueryparam cfsqltype="cf_sql_varchar" value="#createUUID()#" />::uuid
+				WHERE "timestamp" = <cfqueryparam cfsqltype="cf_sql_timestamp" value="#local.results.timestamp#">
+					AND "ipAddress" = <cfqueryparam cfsqltype="cf_sql_varchar" value="#local.results.ipAddress.toString()#">::inet
+			</cfquery>
+		</cfloop>
+		
+		<!--- Remove any errant nulls --->
+		<cfquery datasource="#variables.datasource.name#">
+			DELETE
+			FROM "#variables.datasource.prefix#tracker".event
+			WHERE "eventID" IS NULL
+		</cfquery>
+		
+		<!--- Make Event ID not NULL --->
+		<cfquery datasource="#variables.datasource.name#">
+			ALTER TABLE "#variables.datasource.prefix#tracker".event ALTER COLUMN "eventID" SET NOT NULL;
+		</cfquery>
+		
+		<!--- Create new primary ID --->
+		<cfquery datasource="#variables.datasource.name#">
+			ALTER TABLE "#variables.datasource.prefix#tracker".event ADD PRIMARY KEY ("eventID");
 		</cfquery>
 	</cffunction>
 </cfcomponent>
