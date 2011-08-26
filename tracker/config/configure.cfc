@@ -127,7 +127,6 @@
 		--->
 		
 		<!--- Drop the old primary key --->
-		<!--- 
 		<cfquery datasource="#variables.datasource.name#">
 			ALTER TABLE "#variables.datasource.prefix#tracker".event DROP CONSTRAINT tracker_event_PK;
 		</cfquery>
@@ -136,7 +135,6 @@
 		<cfquery datasource="#variables.datasource.name#">
 			ALTER TABLE "#variables.datasource.prefix#tracker".event ADD COLUMN "eventID" uuid;
 		</cfquery>
-		 --->
 		
 		<!--- Make sure all the ids have a value --->
 		<cfquery name="local.results" datasource="#variables.datasource.name#">
