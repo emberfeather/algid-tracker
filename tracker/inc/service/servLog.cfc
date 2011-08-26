@@ -16,6 +16,7 @@
 		<cfquery datasource="#variables.datasource.name#">
 			INSERT INTO "#variables.datasource.prefix#tracker"."event"
 			(
+				"eventID",
 				"ipAddress",
 				"plugin",
 				"key",
@@ -23,6 +24,7 @@
 				"userID",
 				"itemID"
 			) VALUES (
+				<cfqueryparam cfsqltype="cf_sql_varchar" value="#createUUID()#" />::uuid,
 				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.ipAddress#" />::inet,
 				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.plugin#" />,
 				<cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.key#" />,
